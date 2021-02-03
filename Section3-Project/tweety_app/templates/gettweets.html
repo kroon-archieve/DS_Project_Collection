@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title  %}
+Tweet List
+{% endblock  %}
+
+{% block lead  %}
+{{description}}'s Tweets
+{% endblock  %}
+
+{% block main_body  %}
+To see tweets for the user, press the Add button
+
+<form method="POST" action="/gettweets">
+    
+     <label for="exampleFormControlSelect1"></label>
+    <select name="username" class="form-control" id="exampleFormControlSelect1">
+        {% for user in datas %}
+        <option value={{user.username}}>{{user.username}}</option>
+        {% endfor %}
+    </select>
+     <input type="submit" class="btn btn-primary" value="View" />
+    <div class="form-group">
+    </div>
+</form>
+
+{% if data %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">tweet</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for data in data %}
+    <tr>
+      <td scope="row">{{ data }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% endblock  %}

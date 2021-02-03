@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title  %}
+Compare User
+{% endblock  %}
+
+{% block lead  %}
+You can compare user data.
+<br>
+<br>
+{{selected_user}}
+{{message}}
+{% endblock  %}
+
+{% block main_body  %}
+
+{% if data %}
+To compare press the button
+<form method="POST" action="/compare">
+    <div class="form-group">
+        <label for="exampleFormControlSelect1"></label>
+        <select name="selected_user1" class="form-control" id="exampleFormControlSelect1">
+            {% for user in data %}
+            <option value={{user.username}}>{{user.username}}</option>
+            {% endfor %}
+        </select>
+        <label for="exampleFormControlSelect2"></label>
+        <select name="selected_user2" class="form-control" id="exampleFormControlSelect2">
+            {% for user in data %}
+            <option value={{user.username}}>{{user.username}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <input name="input_msg" class="form-control" type="text" placeholder="Text to compare">
+    <br>
+    <input type="submit" class="btn btn-primary" value="Compare" />
+</form>
+<br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Username</th>
+      <th scope="col">Full_name</th>
+      <th scope="col">Followers</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{ data.id }}</th>
+      <td>{{ data.username }}</td>
+      <td>{{ data.full_name }}</td>
+      <td>{{ data.followers }}</td>
+    </tr>
+  </tbody>
+</table>
+{% endif %}
+
+{% endblock  %}

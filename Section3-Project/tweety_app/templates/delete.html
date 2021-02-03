@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title  %}
+Delete User
+{% endblock  %}
+
+{% block lead  %}
+You can delete users by username.
+
+{% endblock  %}
+
+{% block main_body  %}
+To delete press the button</br>
+<b>{{description}}</b>
+
+
+<form method="POST" action="/delete">
+    <div class="form-group">
+        <label for="exampleFormControlSelect1"></label>
+        <select name="selected_user" class="form-control" id="exampleFormControlSelect1">
+            {% for user in data %}
+            <option value={{user.username}}>{{user.username}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <br>
+    <input type="submit" class="btn btn-primary" value="Delete" />
+</form>
+<br>
+{% if data %}
+<table class="table">
+<thead>
+<tr>
+    <th scope="col">#</th>
+    <th scope="col">Username</th>
+    <th scope="col">Full Name</th>
+    <th scope="col"># of Followers</th>
+    <th scope="col">Location</th>
+</tr>
+</thead>
+<tbody>
+{% for user in data %}
+<tr>
+    <th scope="row">{{ user.id }}</th>
+    <td>{{ user.username }}</td>
+    <td>{{ user.full_name }}</td>
+    <td>{{ user.followers }}</td>
+    <td>{{ user.location }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endif %}
+
+
+{% endblock  %}

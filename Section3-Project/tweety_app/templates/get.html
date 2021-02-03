@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title  %}
+Tweet List
+{% endblock  %}
+
+{% block lead  %}
+{{username}}'s Tweets
+{% endblock  %}
+
+{% block main_body  %}
+
+{% if data %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Text</th>
+        </tr>
+    </thead>
+        <tbody>
+        {% for tweet in data %}
+        <tr>
+            <th scope="row">{{ tweet.id }}</th>
+            <td>{{ tweet.text }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+</table>
+{% endif %}
+{% endblock %}

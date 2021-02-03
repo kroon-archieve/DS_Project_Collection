@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title  %}
+Update User
+{% endblock  %}
+
+{% block lead  %}
+You can change the username or full name.
+{% endblock  %}
+
+{% block main_body  %}
+
+{% if data %}
+To update press the button
+
+<form method="POST" action="/update">
+    <div class="form-group">
+        <label for="exampleFormControlSelect1"></label>
+        <select name="name_type" class="form-control" id="exampleFormControlSelect1">
+            <option value='username'>User Name</option>
+            <option value='full_name'>Full Name</option>
+        </select>
+        <label for="exampleFormControlSelect2"></label>
+        <select name="selected_user" class="form-control" id="exampleFormControlSelect2">
+            {% for user in data %}
+            <option value={{user.username}}>{{user.username}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <input name="change_name" class="form-control" type="text" placeholder="New Name">
+    <br>
+    <input type="submit" class="btn btn-primary" value="Update" />
+</form>
+<br>
+<table class="table">
+<thead>
+<tr>
+    <th scope="col">#</th>
+    <th scope="col">Username</th>
+    <th scope="col">Full Name</th>
+    <th scope="col">
+        # of Followers</th>
+    <th scope="col">Location</th>
+</tr>
+</thead>
+<tbody>
+{% for user in data %}
+<tr>
+    <th scope="row">{{ user.id }}</th>
+    <td>{{ user.username }}</td>
+    <td>{{ user.full_name }}</td>
+    <td>{{ user.followers }}</td>
+    <td>{{ user.location }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endif %}
+
+
+{% endblock  %}
